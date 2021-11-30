@@ -14,7 +14,7 @@ then
 	if test -f Day$day.cpp;
 	then
 		g++ *.cpp -O2 -o aoc2020 -std=c++17 -DDAY$day -Wall
-		time ./aoc2020
+		./aoc2020
 		rm -rf aoc2020
 	else
 		echo "Day" $day "does not exist"
@@ -38,7 +38,7 @@ else
 		fi
 	done
 	g++ *.cpp -O2 -o aoc2020 -std=c++17 $COMPILERSTRING
-	time ./aoc2020
+	./aoc2020
 	rm -rf aoc2020
 	if [ "$missing" != "" ]
 	then

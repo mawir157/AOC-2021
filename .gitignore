@@ -9,6 +9,7 @@
 !/Go/*.go
 !/Go/run.sh
 # C++ files
+/C++/*
 !/C++/*.cpp
 !/C++/*.h
 !/C++/run.sh

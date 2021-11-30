@@ -15,9 +15,3 @@ figlet C++ -w 80 -c
 cd C++
 ./run.sh $1
 cd ..
-
-echo
-figlet Rust -w 80 -c
-cd Rust
-./run.sh $1
-cd ..
