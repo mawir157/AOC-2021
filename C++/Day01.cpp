@@ -3,21 +3,11 @@
 namespace Day01
 {
 
-	int Part1(const std::vector<int> v)
+	int diff_off(const std::vector<int>& v, const size_t offset)
 	{
 		int acc = 0;
-		for (size_t i = 1; i < v.size(); ++i)
-			if (v[i - 1] < v[i])
-				acc += 1;
-
-		return acc;
-	}
-
-	int Part2(const std::vector<int> v)
-	{
-		int acc = 0;
-		for (size_t i = 0; i < v.size() - 3; ++i)
-			if (v[i] < v[i + 3])
+		for (size_t i = 0; i < v.size() - offset; ++i)
+			if (v[i] < v[i + offset])
 				acc += 1;
 
 		return acc;
@@ -33,7 +23,7 @@ namespace Day01
 		               std::back_inserter(values),
 		               [](std::string s) -> int { return std::stoi(s); });
 
-		AH::PrintSoln(1, Part1(values), Part2(values));
+		AH::PrintSoln(1, diff_off(values, 1), diff_off(values, 3));
 
 		return 0;
 	}
