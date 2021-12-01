@@ -3,8 +3,8 @@ package main
 import AH "./adventhelper"
 
 func part1(vec []int) (acc int) {
-	for i := 1; i < len(vec); i++ {
-		if vec[i - 1] < vec[i] {
+	for i := 0; i < len(vec) - 1; i++ {
+		if vec[i] < vec[i+1] {
 			acc += 1
 		}
 	}

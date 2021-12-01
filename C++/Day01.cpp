@@ -10,7 +10,7 @@ namespace Day01
 			if (v[i - 1] < v[i])
 				acc += 1;
 
-	  return acc;
+		return acc;
 	}
 
 	int Part2(const std::vector<int> v)
@@ -20,7 +20,7 @@ namespace Day01
 			if (v[i] < v[i + 3])
 				acc += 1;
 
-	  return acc;
+		return acc;
 	}
 
 	int Run(const std::string& filename)
@@ -33,7 +33,7 @@ namespace Day01
 		               std::back_inserter(values),
 		               [](std::string s) -> int { return std::stoi(s); });
 
-		AH::PrintSoln(1, Day01::Part1(values), Day01::Part2(values));
+		AH::PrintSoln(1, Part1(values), Part2(values));
 
 		return 0;
 	}

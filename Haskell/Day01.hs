@@ -1,7 +1,7 @@
 import AdventHelper
 
-part2 :: [Integer] -> [Bool]
-part2 x = map (\(l,r) -> l > r) $ zip (drop 3 x) x
+part2 :: [Integer] -> [(Integer, Integer)]
+part2 x = filter (\(l,r) -> l > r) (zip (drop 3 x) x)
 
 main = do
   putStrLn "Day 1"
@@ -9,4 +9,4 @@ main = do
   let ss = map(read) $ lines f :: [Integer]
 
   printSoln 1 (length $ filter (< 0) $ diff ss)
-  printSoln 2 (length $ filter (== True) $ part2 ss)
+  printSoln 2 (length $ part2 ss)
