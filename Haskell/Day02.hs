@@ -20,12 +20,12 @@ applyWithAim (h, v, a) (d, val)
   | d == "down"    = (h, v, a + val)
 
 main = do
-  putStrLn "Day 1"
+  putStrLn "Day 2"
   f <- readFile "../input/input02.txt"
   let is = map parseRule $ lines f
 
-  let p1 = foldl apply (0,0) is
-  let p2 = foldl applyWithAim (0,0,0) is
+  let p1 = foldl apply (0,0) is 
+  let p2 = foldl applyWithAim (0,0,0) is 
 
   printSoln 1 $ (fst p1) * (snd p1)
   printSoln 2 $ (fst' p2) * (snd' p2)
