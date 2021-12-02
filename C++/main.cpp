@@ -6,9 +6,9 @@ int main(int argc, char const *argv[])
 	Day01::Run("../input/input01.txt");
 	#endif
 
-	// #ifdef DAY02
-	// Day02::Run("../input/input02.txt");
-	// #endif
+	#ifdef DAY02
+	Day02::Run("../input/input02.txt");
+	#endif
 
 	// #ifdef DAY03
 	// Day03::Run("../input/input03.txt");
