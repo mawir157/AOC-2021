@@ -10,7 +10,7 @@ func bitCount(m map[string]bool, size int) []int {
 			if r == '1' {
 				counts[i] += 1
 			}
-  	}
+		}
 	}
 
 	return counts
@@ -84,7 +84,6 @@ func Oxygen(m map[string]bool, size int) (o2 int, co2 int) {
 		co2Good[k] = v
 	}
 
-	// do these sperately
 	o2  = setReduce(o2Good, size, true)
 	co2 = setReduce(co2Good, size, false)
 
