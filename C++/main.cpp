@@ -10,9 +10,9 @@ int main(int argc, char const *argv[])
 	Day02::Run("../input/input02.txt");
 	#endif
 
-	// #ifdef DAY03
-	// Day03::Run("../input/input03.txt");
-	// #endif
+	#ifdef DAY03
+	Day03::Run("../input/input03.txt");
+	#endif
 
 	// #ifdef DAY04
 	// Day04::Run("../input/input04.txt");
