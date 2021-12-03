@@ -38,7 +38,7 @@ namespace Day03
 		return gamma * epsilon;
 	}
 
-	int stringToBin(const std::string s)
+	int stringToBin(const std::string& s)
 	{
 		int bin = 0;
 		for (auto c : s)
@@ -59,11 +59,7 @@ namespace Day03
 		{
 			const auto mostCommon = bitCount(t, size);		
 
-			char r;
-			if (2 * mostCommon[i] >= t.size())
-				r = '1';
-			else
-				r = '0';
+			const char r = (2 * mostCommon[i] >= t.size()) ? '1' : '0';
 
 			for (auto it = t.begin(); it != t.end(); )
 			{
