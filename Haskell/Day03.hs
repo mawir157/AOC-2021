@@ -1,8 +1,8 @@
 import AdventHelper
 
 bitCount :: [String] -> [Int]
-bitCount ss = foldl1 (zipWith (+)) $ map singleCount ss
-  where singleCount s = map (\c -> if' (c == '1') 1 0) s
+bitCount ss = foldl1 (zipWith (+)) $ map bitCount' ss
+  where bitCount' s = map (\c -> if' (c == '1') 1 0) s
 
 toBin :: [Bool] -> Int
 toBin b = foldl toBin' 0 b
@@ -31,5 +31,5 @@ main = do
   let o2 = stringToBin $ reduce True 0 ss
   let co2 = stringToBin $ reduce False 0 ss
 
-  printSoln 1 $ (gamma * epsilon)
-  printSoln 2 $ (o2 * co2)
+  printSoln 1 $ gamma * epsilon
+  printSoln 2 $ o2 * co2
