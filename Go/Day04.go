@@ -27,7 +27,7 @@ func buildBoard(ss []string) (b Board) {
 		lines := strings.Split(s, " ")
 		temp := []int{}
 		for _, l := range lines {
-			if len(l) == 0 { continue } // guard against double spaces
+			if len(l) == 0 { continue }
 			n, _ := strconv.Atoi(l)
 			temp = append(temp, n)
 		}
