@@ -14,9 +14,9 @@ int main(int argc, char const *argv[])
 	Day03::Run("../input/input03.txt");
 	#endif
 
-	// #ifdef DAY04
-	// Day04::Run("../input/input04.txt");
-	// #endif
+	#ifdef DAY04
+	Day04::Run("../input/input04.txt");
+	#endif
 
 	// #ifdef DAY05
 	// Day05::Run("../input/input05.txt");

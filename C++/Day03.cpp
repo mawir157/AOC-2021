@@ -10,7 +10,7 @@ namespace Day03
 
 		for (auto i = s.begin(); i != s.end(); ++i)
 		{
-			auto str = *i; 
+			auto str = *i;
 			for (int i = 0; i < str.size(); i++)
 				if (str[i] == '1')
 					count[i] += 1;
@@ -29,7 +29,7 @@ namespace Day03
 			gamma <<= 1;
 			epsilon <<= 1;
 
-			if (2 * b >= s.size()) 
+			if (2 * b >= s.size())
 				gamma += 1;
 			else
 				epsilon += 1;
