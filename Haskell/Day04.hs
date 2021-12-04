@@ -50,6 +50,7 @@ part2 bs (n:ns)
   where bs' = filter (not.winning) $ map (callNumber n) bs
 
 main = do
+  putStrLn "Day 4"
   f <- readFile "../input/input04.txt"
   let ss = lines f
 
