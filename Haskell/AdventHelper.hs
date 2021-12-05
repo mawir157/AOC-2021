@@ -1,6 +1,7 @@
 module AdventHelper where
 import Data.List
 import Data.List.Split
+import qualified Data.Map as Map
 
 splitOnAnyOf :: Eq a => [[a]] -> [a] -> [[a]]
 splitOnAnyOf ds xs = foldl' (\ys d -> ys >>= splitOn d) [xs] ds
@@ -54,3 +55,12 @@ chiRemThm :: (Integer, Integer) -> (Integer, Integer) -> (Integer, Integer)
 chiRemThm (a1, p1) (a2, p2) = (a3, p1 * p2)
   where a3 = head $ filter (\x -> x `mod` p2 == a2 `mod` p2) cands
         cands = [ a1 + n * p1 | n <- [1..p2]]
+
+range :: (Int, Int) -> [Int]
+range (x,y) = [x, (x + signum (y - x)) .. y]
+
+
+incrementMap :: Ord a => Map.Map a Int -> a -> Map.Map a Int
+incrementMap m k
+  | Map.member k m = Map.adjust (\v -> v + 1) k m
+  | otherwise      = Map.insert k 1 m
