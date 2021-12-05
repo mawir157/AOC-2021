@@ -11,7 +11,7 @@ namespace Day03
 		for (auto i = s.begin(); i != s.end(); ++i)
 		{
 			auto str = *i;
-			for (int i = 0; i < str.size(); i++)
+			for (size_t i = 0; i < str.size(); i++)
 				if (str[i] == '1')
 					count[i] += 1;
 		}
