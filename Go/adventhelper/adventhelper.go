@@ -188,6 +188,16 @@ func AbsInt(i int) int {
 	return i
 }
 
+// Not defined in math!
+func Sign(i int) int {
+	if (i == 0) {
+		return 0
+	} else if (i < 0) {
+		return - 1
+	}
+	return 1
+}
+
 // Sets the bit at pos in the integer n.
 func SetBit(n int, pos uint) int {
 	n |= (1 << pos)
