@@ -64,3 +64,6 @@ incrementMap :: Ord a => Map.Map a Int -> a -> Map.Map a Int
 incrementMap m k
   | Map.member k m = Map.adjust (\v -> v + 1) k m
   | otherwise      = Map.insert k 1 m
+
+freq :: (Eq a, Ord a) => [a] -> [(a, Int)]
+freq xs = map (\x -> (head x, length x)) . group . sort $ xs
