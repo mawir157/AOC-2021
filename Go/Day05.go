@@ -49,7 +49,7 @@ func addLine(m map[Pos]int, l Line, no_d bool) {
 		}
 	} else { // x and y vary
 		stepx, stepy := AH.Sign(l.end.x - l.start.x), AH.Sign(l.end.y - l.start.y)
-		for ; (v.x != l.end.x) || (v.y != l.end.y) ;  {
+		for ; (v.x != l.end.x) || (v.y != l.end.y) ; {
 			m[v] += 1
 			v.y += stepy
 			v.x += stepx
