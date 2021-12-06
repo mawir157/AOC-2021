@@ -22,9 +22,9 @@ int main(int argc, char const *argv[])
 	Day05::Run("../input/input05.txt");
 	#endif
 
-	// #ifdef DAY06
-	// Day06::Run("../input/input06.txt");
-	// #endif
+	#ifdef DAY06
+	Day06::Run("../input/input06.txt");
+	#endif
 
 	// #ifdef DAY07
 	// Day07::Run("../input/input07.txt");

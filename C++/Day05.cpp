@@ -79,7 +79,6 @@ namespace Day05
 	{
 		auto inputLines = AH::ReadTextFile(filename);
 		
-		// convert lines to int
 		std::vector<Line> lines;
 		std::transform(inputLines.begin(), inputLines.end(),
 		               std::back_inserter(lines),
