@@ -26,7 +26,7 @@ namespace Day07
 
 		auto [hi, lo] = maxMin(crabs);
 
-		for (int i = 0; i <= hi; ++i)
+		for (int i = lo; i <= hi; ++i)
 		{
 			int temp1 = 0;
 			int temp2 = 0;
