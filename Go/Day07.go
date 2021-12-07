@@ -7,23 +7,26 @@ import (
 	"strings"
 )
 
-func crabEnergy(cs []int, p1 bool) (energy int) {
-	energy = (1 << 31) // a big number 
+func crabEnergy(cs []int) (energy1 int, energy2 int) {
+	energy1 = (1 << 31)
+	energy2 = (1 << 31)
 	hi, lo := AH.MaxAndMin(cs)
 
 	for i := lo; i <= hi; i++ {
-		temp_energy := 0
+		tempEnergy1 := 0
+		tempEnergy2 := 0
 		for _, v := range cs {
 			n := AH.AbsInt(v - i)
-			if p1 {
-				temp_energy += n
-			} else {
-				temp_energy += (n * (n + 1)) / 2
-			}
+			tempEnergy1 += n
+			tempEnergy2 += (n * (n + 1)) / 2
 		}
 
-		if temp_energy < energy {
-			energy = temp_energy
+		if tempEnergy1 < energy1 {
+			energy1 = tempEnergy1
+		}
+
+		if tempEnergy2 < energy2 {
+			energy2 = tempEnergy2
 		}
 	}
 
@@ -39,7 +42,9 @@ func main() {
 		crabs = append(crabs, c)
 	}
 
-	AH.PrintSoln(7, crabEnergy(crabs, true), crabEnergy(crabs, false))
+	p1, p2 := crabEnergy(crabs)
+
+	AH.PrintSoln(7, p1, p2)
 
 	return
 }
