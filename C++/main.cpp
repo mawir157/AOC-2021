@@ -30,13 +30,13 @@ int main(int argc, char const *argv[])
 	Day07::Run("../input/input07.txt");
 	#endif
 
-	// #ifdef DAY08
-	// Day08::Run("../input/input08.txt");
-	// #endif
+	#ifdef DAY08
+	Day08::Run("../input/input08.txt");
+	#endif
 
-	// #ifdef DAY09
-	// Day09::Run("../input/input09.txt");
-	// #endif
+	#ifdef DAY09
+	Day09::Run("../input/input09.txt");
+	#endif
 
 	// #ifdef DAY10
 	// Day10::Run("../input/input10.txt");
