@@ -6,17 +6,17 @@ import (
 	"sort"
 )
 
-func score1(s string) int {
-	if s == ")" {
+func score1(r rune) int {
+	if r == ')' {
 		return 3
 	}
-	if s == "]" {
+	if r == ']' {
 		return 57
 	}
-	if s == "}" {
+	if r == '}' {
 		return 1197
 	}
-	if s == ">" {
+	if r == '>' {
 		return 25137
 	}
 
@@ -45,15 +45,11 @@ func score2(s string) (score int) {
 }
 
 func closing(l rune, r rune) bool {
-	if (l == '(' && r == ')') || (l == '{' && r == '}') ||
-	   (l == '[' && r == ']') || (l == '<' && r == '>') {
-		return true
-	}
-
-	return false
+	return (l == '(' && r == ')') || (l == '{' && r == '}') ||
+	       (l == '[' && r == ']') || (l == '<' && r == '>')
 }
 
-func illegal(s string) (string, string) {
+func illegal(s string) (rune, string) {
 	stack := ""
 	for _, r := range s {
 		if AH.ContainsChar("({<[", r) {// bra
@@ -61,11 +57,11 @@ func illegal(s string) (string, string) {
 		} else if (closing(AH.FirstRune(stack), r)) {
 			stack = AH.TrimFirstRune(stack)
 		} else {
-			return string(r), "" // found bad character
+			return r, "" // found bad character
 		}
 	}
 	// reached the end of the string
-	return "", stack
+	return 'X', stack
 }
 
 func main() {
@@ -79,7 +75,7 @@ func main() {
 		a,b := illegal(s)
 
 		part1 += score1(a)
-		if len(b) > 0 {
+		if a == 'X' {
 			goodCount += 1
 			part2arr = append(part2arr, score2(b))
 		}
