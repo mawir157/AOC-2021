@@ -22,6 +22,13 @@ namespace Day05
 
 	void addLine(std::map<Point, int>& m, const Line& l, const bool d)
 	{
+		if (!d) {
+			if ((l.first.first != l.second.first) &&
+				  (l.first.second != l.second.second)) {
+				return;
+			}
+		}
+
 		auto v = l.first;
 		if (l.first.first == l.second.first) // second varies
 		{
@@ -35,7 +42,7 @@ namespace Day05
 			for (; v.first != l.second.first; v.first += step)
 				m[v]++;		
 		}
-		else if (d) // this is a diagonal pipe;
+		else // this is a diagonal pipe;
 		{
 			const auto step0 = (l.second.first > l.first.first) ? 1 : -1;
 			const auto step1 = (l.second.second > l.first.second) ? 1 : -1;
