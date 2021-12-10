@@ -140,8 +140,10 @@ func FirstRune(str string) (r rune) {
 }
 
 // Last
-func FinalRune(str string) string {
-  return str[len(str)-1:]
+func FinalRune(str string) (r rune) {
+  for _, r = range str {
+  }
+  return
 }
 
 // Tail

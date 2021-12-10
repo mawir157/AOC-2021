@@ -126,7 +126,6 @@ func unscramble(ss []string) ([]string) {
 	}
 	ss = filter(ss, Word3)
 
-
 	// find the length 5 not contained in Word9
 	Word2 := "[2]"
 	Word5 := "[5]"
