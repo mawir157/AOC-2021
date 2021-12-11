@@ -55,15 +55,15 @@ namespace Day11
 		return ps;
 	}
 
-	int octoTick(Octopi& ocks)
+	unsigned int octoTick(Octopi& ocks)
 	{
 		// increment all the octopode
 		for (auto & [p, o] : ocks)
 				o.Level++;
 
 		// flash all octopode
-		int total_flashes = 0;
-		int flash_count = 1;
+		unsigned int total_flashes = 0;
+		unsigned int flash_count = 1;
 		while (flash_count != 0)
 		{
 			flash_count = 0;
@@ -75,12 +75,12 @@ namespace Day11
 					++flash_count;
 					o.Flashed = true;
 
-					auto ns = nbrs(p); // get all neighrbour
+					auto ns = nbrs(p); // get all neighbours
 					for (auto n : ns)
 					{
 						auto nOck = ocks.find(n);
-						if (nOck != ocks.end()) // if neighnour exists...
-							(nOck->second).Level += 1; // ... increment it
+						if (nOck != ocks.end()) // if neighbour exists...
+							(nOck->second).Level += 1; // ...increment it
 					}
 				}
 			}
@@ -91,10 +91,10 @@ namespace Day11
 		// the octopi have finished flashing
 		for (auto & [p, o] : ocks)
 		{
-				if (o.Level > 9)
-					o.Level = 0;
+			if (o.Level > 9)
+				o.Level = 0;
 
-				o.Flashed = false;
+			o.Flashed = false;
 		}
 
 		return total_flashes;
@@ -103,18 +103,18 @@ namespace Day11
 	int Run(const std::string& filename)
 	{
 		auto inputLines = AH::ReadTextFile(filename);
-		auto ocks1 = GetOctopi(inputLines);
-		auto ocks2 = GetOctopi(inputLines);
+		auto ocks = GetOctopi(inputLines);
 
 		int part1 = 0;
 		int part2 = 0;
-		for (size_t part2 = 0; part2 < 100; ++part2)
-			part1 += octoTick(ocks1);
+
+		for (part2 = 0; part2 < 100; ++part2)
+			part1 += octoTick(ocks);
 
 		while (true)
 		{
 			++part2;
-			if (octoTick(ocks2) == 100) // 100 is the magic number!
+			if (octoTick(ocks) == ocks.size()) // 100 is the magic number!
 				break;
 		}
 

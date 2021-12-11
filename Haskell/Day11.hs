@@ -42,10 +42,10 @@ incHelper :: Octos -> (Int, Int) -> Octos
 incHelper os p = Map.adjust (\(v,b) -> (v+1,b)) p os
 
 flashedHelper :: Octos -> (Int, Int) -> Octos
-flashedHelper os p = Map.adjust(\(v,b) -> (v, True)) p os
+flashedHelper os p = Map.adjust(\(v,_) -> (v, True)) p os
 
 resetHelper :: Octos -> (Int, Int) -> Octos
-resetHelper os p = Map.adjust(\(v,b) -> (if' (v > 9) 0 v, False)) p os
+resetHelper os p = Map.adjust(\(v,_) -> (if' (v > 9) 0 v, False)) p os
 
 octoLife :: Int -> (Octos, Int) ->  (Octos, Int)
 octoLife 0 os = os
@@ -56,7 +56,7 @@ octoLifeSim (os, n)
   | flag      = (os, n)
   | otherwise = octoLifeSim (os', n+1)
   where ps = foldl incHelper os $ Map.keys os -- increment all octopus
-        (qs, n') = flashRep (ps, n) -- do all flashes
+        (qs, _) = flashRep (ps, n) -- do all flashes
         flag = and $ map snd $ Map.elems qs -- everything flashed this tick
         os' = foldl resetHelper qs $ Map.keys qs 
 
