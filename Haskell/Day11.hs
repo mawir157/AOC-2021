@@ -1,9 +1,5 @@
 import AdventHelper
 
-import Data.Maybe
-import Data.List
-import Debug.Trace
-
 import qualified Data.Map as Map
 
 type Octos = Map.Map (Int,Int) (Int, Bool)
