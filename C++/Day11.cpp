@@ -17,7 +17,7 @@ namespace Day11
 		Level(Level), Flashed(Flashed) {}
 	Octopus::Octopus() : Level(-1), Flashed(false) {}
 
-	typedef	std::map<std::pair<int, int>, Octopus> Octopi;
+	typedef std::map<std::pair<int, int>, Octopus> Octopi;
 
 	Octopi GetOctopi(const std::vector<std::string>& ss)
 	{

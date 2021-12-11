@@ -24,13 +24,13 @@ octoTick (os, n) = (os', n')
         os' = foldl resetHelper qs $ Map.keys qs -- reset all to unflashed
 
 flash :: (Octos, Int) -> (Octos, Int)
-flash (os, n) = (os', n+m)
+flash (os, n) = (os', n + length fs)
   where fs = Map.keys $ Map.filter (flashNow) os -- which octopus flash
-        m = length fs -- how many octopus flash
         nbrs = concat $ map getNbrs fs -- the octopus hit by flashes
         ps = foldl incHelper os nbrs -- increment the hit octopus
         os' = foldl flashedHelper ps fs -- flag the flashed octopuss
         flashNow (v,b) = (v > 9) && (not b)
+        getNbrs (x,y) = map (\(dx, dy) -> (x+dx, y+dy)) dirs
 
 flashRep :: (Octos, Int) -> (Octos, Int)
 flashRep (os, n)
@@ -46,9 +46,6 @@ flashedHelper os p = Map.adjust(\(v,b) -> (v, True)) p os
 
 resetHelper :: Octos -> (Int, Int) -> Octos
 resetHelper os p = Map.adjust(\(v,b) -> (if' (v > 9) 0 v, False)) p os
-
-getNbrs :: (Int, Int) -> [(Int, Int)]
-getNbrs (x,y) = map (\(dx, dy) -> (x+dx, y+dy)) dirs 
 
 octoLife :: Int -> (Octos, Int) ->  (Octos, Int)
 octoLife 0 os = os
