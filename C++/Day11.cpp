@@ -114,7 +114,7 @@ namespace Day11
 		while (true)
 		{
 			++part2;
-			if (octoTick(ocks) == ocks.size()) // 100 is the magic number!
+			if (octoTick(ocks) == ocks.size())
 				break;
 		}
 
