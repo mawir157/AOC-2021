@@ -94,7 +94,7 @@ namespace Day12
 		return vs;
 	}
 
-	Graph buildGraph(const std::vector<std::string>& ss)
+	Graph buildGraph(const std::vector<std::string>& ss, const bool part2 = false)
 	{
 		Graph g;
 		for (auto s : ss)
@@ -105,7 +105,7 @@ namespace Day12
 		}
 		g.visit("start");
 		g.visit("start");
-		g.m_bonus_cave = false;
+		g.m_bonus_cave = part2;
 
 		return g;
 	}
@@ -130,14 +130,11 @@ namespace Day12
 	int Run(const std::string& filename)
 	{
 		auto inputLines = AH::ReadTextFile(filename);
-    auto g = buildGraph(inputLines);
+    const auto g1 = buildGraph(inputLines);
+    const auto g2 = buildGraph(inputLines, true);
 
-    auto part1 = countPaths(g, "start", "end");
-
-		g.m_bonus_cave = true;
-		auto part2 = countPaths(g, "start", "end");
-
-		AH::PrintSoln(12, part1, part2);
+		AH::PrintSoln(12, countPaths(g1, "start", "end"),
+			                countPaths(g2, "start", "end"));
 
 		return 0;
 	}
