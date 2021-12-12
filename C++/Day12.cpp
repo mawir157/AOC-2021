@@ -75,7 +75,7 @@ namespace Day12
 	{
 		std::vector<std::string> vs;
 		// how many pervious visted to a small cave are allowed?
-		const int allowed = m_bonus_cave ? 1 : 0; 
+		const int allowed = m_bonus_cave ? 1 : 0;
 
 		for (auto e : m_edges)
 		{
@@ -130,8 +130,8 @@ namespace Day12
 	int Run(const std::string& filename)
 	{
 		auto inputLines = AH::ReadTextFile(filename);
-    const auto g1 = buildGraph(inputLines);
-    const auto g2 = buildGraph(inputLines, true);
+		const auto g1 = buildGraph(inputLines);
+		const auto g2 = buildGraph(inputLines, true);
 
 		AH::PrintSoln(12, countPaths(g1, "start", "end"),
 			                countPaths(g2, "start", "end"));

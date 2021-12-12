@@ -102,7 +102,7 @@ func CopyGraph(g Graph) (Graph) {
 	}
 
 	return Graph{vertices:new_vertices, edges:new_edges, part2:g.part2,
-               visited:new_visited}
+	             visited:new_visited}
 }
 
 func countPaths(g Graph, from string, to string) int {

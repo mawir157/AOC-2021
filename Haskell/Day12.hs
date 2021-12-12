@@ -22,8 +22,8 @@ initPath es b = (Map.insert "start" 2 (Map.fromList xs), b)
 adj :: [Edge] -> Path -> String -> [String]
 adj g (caves, bonus) vert = nbr
   where allowed = if' bonus 1 0
-        edf = map snd $ filter (\(f, _) -> (f == vert)) g 
-        edt = map fst $ filter (\(_, t) -> (t == vert)) g 
+        edf = map snd $ filter (\(f, _) -> (f == vert)) g
+        edt = map fst $ filter (\(_, t) -> (t == vert)) g
         nbr = filter (\v -> (fromJust (Map.lookup v caves)) <= allowed) (edf ++ edt)
 
 visit :: Path -> String -> Path
