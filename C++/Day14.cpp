@@ -41,8 +41,8 @@ namespace Day14
 		return newPairs;
 	}
 
-	PairCounts repAapplyRules(const unsigned int n, const Rules rs,
-		                        const PairCounts ps)
+	PairCounts repApplyRules(const unsigned int n, const Rules rs,
+		                       const PairCounts ps)
 	{
 		auto psTemp = ps;
 		for (unsigned int i = 0; i < n; ++i)
@@ -80,8 +80,8 @@ namespace Day14
 		auto rules = parseInput(inputLines);
 		
 		const auto final = inputLines[0].back();
-		const auto p1 = repAapplyRules(10, rules, pairs);
-		const auto p2 = repAapplyRules(40, rules, pairs);
+		const auto p1 = repApplyRules(10, rules, pairs);
+		const auto p2 = repApplyRules(40, rules, pairs);
 
 		AH::PrintSoln(14, score(p1, final), score(p2, final));
 
