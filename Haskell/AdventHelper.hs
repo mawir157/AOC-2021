@@ -1,6 +1,7 @@
 module AdventHelper where
 import Data.List
 import Data.List.Split
+import Data.Maybe
 import qualified Data.Map as Map
 
 splitOnAnyOf :: Eq a => [[a]] -> [a] -> [[a]]
@@ -59,11 +60,15 @@ chiRemThm (a1, p1) (a2, p2) = (a3, p1 * p2)
 range :: (Int, Int) -> [Int]
 range (x,y) = [x, (x + signum (y - x)) .. y]
 
-
-incrementMap :: Ord a => Map.Map a Int -> a -> Map.Map a Int
-incrementMap m k
-  | Map.member k m = Map.adjust (\v -> v + 1) k m
-  | otherwise      = Map.insert k 1 m
-
 freq :: (Eq a, Ord a) => [a] -> [(a, Int)]
 freq xs = map (\x -> (head x, length x)) . group . sort $ xs
+
+incr :: (Ord a) => Int -> Map.Map a Int -> a -> Map.Map a Int
+incr i m k
+  | Map.member k m = Map.adjust (\v -> v + i) k m
+  | otherwise      = Map.insert k i m
+
+decr :: (Ord k) => k -> Int -> Map.Map k Int -> Map.Map k Int
+decr k d m
+  | fromJust (Map.lookup k m) > d = Map.adjust (\v -> v - d) k m
+  | otherwise                     = Map.delete k m

@@ -20,7 +20,7 @@ linePoints b ((x0,y0),(x1,y1))
  | otherwise = []
 
 addLine :: Bool -> Space -> Line -> Space
-addLine b m l = foldl incrementMap m $ linePoints b l
+addLine b m l = foldl (incr 1) m $ linePoints b l
 
 main = do
   putStrLn "Day 5"
