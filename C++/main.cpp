@@ -50,9 +50,9 @@ int main(int argc, char const *argv[])
 	Day12::Run("../input/input12.txt");
 	#endif
 
-	// #ifdef DAY13
-	// Day13::Run("../input/input13.txt");
-	// #endif
+	#ifdef DAY13
+	Day13::Run("../input/input13.txt");
+	#endif
 
 	// #ifdef DAY14
 	// Day14::Run("../input/input14.txt");
