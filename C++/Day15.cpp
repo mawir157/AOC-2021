@@ -19,8 +19,8 @@ namespace Day15
 		{
 			for (size_t j = 0; j < ss[i].size(); ++j)
 			{
-				Pos p = std::make_pair(i, j);
-				auto v = std::stoi(ss[i].substr(j, 1));
+				const Pos p = std::make_pair(i, j);
+				const auto v = std::stoi(ss[i].substr(j, 1));
 				cave[p] = v;
 			}
 		}
@@ -51,22 +51,29 @@ namespace Day15
 		return new_cave;
 	}
 
-	std::vector<std::vector<bool>> initGrid(const uint i)
+	std::vector<std::vector<bool>> initBoolGrid(const uint i)
 	{
 		std::vector<std::vector<bool>> grid(i, std::vector<bool>(i, true));
 
 		return grid;
 	}
 
+	std::vector<std::vector<uint>> initIntGrid(const uint i)
+	{
+		std::vector<std::vector<uint>> grid(i, std::vector<uint>(i, 0));
 
-	Pos minDist(const std::unordered_map<Pos, uint, pair_hash>& dist,
+		return grid;
+	}
+
+
+	Pos minDist(const std::vector<std::vector<uint>>& dist,
 	            const std::unordered_set<Pos, pair_hash>& Q)
 	{
 		uint min = 1000000 - 1;
 		Pos p;
 		for (auto & q : Q)
 		{
-			auto v = dist.at(q);
+			const auto v = dist[q.first][q.second];
 			if (v < min)
 			{
 				min = v;
@@ -112,31 +119,31 @@ namespace Day15
 	uint dij(const std::map<Pos, uint>g, const Pos source, const Pos target,
 	         const uint dim)
 	{
-		auto R = initGrid(dim);
+		auto visited = initBoolGrid(dim);
 		std::unordered_set<Pos, pair_hash> Flagged;
-		std::unordered_map<Pos, uint, pair_hash>dist;
+		auto dist = initIntGrid(dim);
 
 		for (auto [k,v] : g)
-			dist[k] = 1000000;
+			dist[k.first][k.second] = 1000000;
 
-		dist[source] = 0;
+		dist[source.first][source.second] = 0;
 		Flagged.insert(source);
 
 		while (true)
 		{
 			auto u = minDist(dist, Flagged);
 
-			R[u.first][u.second] = false;
+			visited[u.first][u.second] = false;
 			Flagged.erase(u);
 			if (u == target)
-				return dist[u];
+				return dist[u.first][u.second];
 
-			auto ns = nbrs(dim, u, R);
+			auto ns = nbrs(dim, u, visited);
 			for (auto & n : ns)
 			{
-				auto alt = dist[u] + g.at(n);
-				if (alt < dist[n])
-					dist[n] = alt;
+				auto alt = dist[u.first][u.second] + g.at(n);
+				if (alt < dist[n.first][n.second])
+					dist[n.first][n.second] = alt;
 
 				Flagged.insert(n);
 			}

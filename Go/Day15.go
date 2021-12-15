@@ -53,7 +53,7 @@ func qCount(Q map[Pos]bool) (count int) {
 	return
 }
 
-func initGrid(n int) [][]bool {
+func initBoolGrid(n int) [][]bool {
 	a := make([][]bool, n)
 	for i := 0; i < n; i++ {
 		a[i] = make([]bool, n)
@@ -62,10 +62,19 @@ func initGrid(n int) [][]bool {
 	return a
 }
 
-func minInMap(m map[Pos]int, Q map[Pos]bool) (q Pos) {
+func initIntGrid(n int) [][]int {
+	a := make([][]int, n)
+	for i := 0; i < n; i++ {
+		a[i] = make([]int, n)
+	}
+
+	return a
+}
+
+func minInMap(m [][]int, Q map[Pos]bool) (q Pos) {
 	min := Infinity
 	for p, _ := range Q {
-		v := m[p]
+		v := m[p.x][p.y]
 		if v < min {
 			min = v
 			q = p
@@ -109,38 +118,38 @@ func nbrs(p Pos, visited[][]bool, dim int) []Pos {
 	return ns
 }
 
-func dij(g map[Pos]int, source Pos, target Pos, dim int) (map[Pos]int) {
-	dist := make(map[Pos]int)
+func dij(g map[Pos]int, source Pos, target Pos, dim int) int {
+	dist := initIntGrid(dim)
 	Flagged := make(map[Pos]bool)
-	visited := initGrid(dim)
+	visited := initBoolGrid(dim)
 
 	for vert, _ := range g {
-		dist[vert] = Infinity
+		dist[vert.x][vert.y] = Infinity
 	}
-	dist[source] = 0
+	dist[source.x][source.y] = 0
 	Flagged[source] = true
 
-	for ; true;  {
+	for ; true; {
 
 		u := minInMap(dist, Flagged)
 		delete(Flagged, u)
 		visited[u.x][u.y] = true
 
 		if (u == target) {
-			return dist
+			return dist[u.x][u.y]
 		}
 
 		ns := nbrs(u, visited, dim)
 		for _, n := range ns {
-			alt := dist[u] + g[n]
-			if alt < dist[n] {
-				dist[n] = alt
+			alt := dist[u.x][u.y] + g[n]
+			if alt < dist[n.x][n.y] {
+				dist[n.x][n.y] = alt
 			}
 
 			Flagged[n] = true
 		}
 	}
-	return dist
+	return -1
 }
 
 
@@ -155,7 +164,7 @@ func main() {
 	bigCave := expandCave(cave, 5, 100)
 	dist2 := dij(bigCave, Pos{x:0, y:0}, target2, 500)
 
-	AH.PrintSoln(15, dist1[target1], dist2[target2])
+	AH.PrintSoln(15, dist1, dist2)
 
 	return
 }
