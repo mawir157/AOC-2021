@@ -29,7 +29,7 @@ namespace Day15
 	}
 
 	std::map<Pos, uint>expandCave(const std::map<Pos, uint>cave,
-		                             const uint n, const uint size)
+	                              const uint n, const uint size)
 	{
 		std::map<Pos, uint>new_cave;
 		for (size_t i = 0; i < n; ++i)
@@ -42,7 +42,7 @@ namespace Day15
 					new_val -= (new_val > 9) ? 9 : 0;
 
 					Pos new_pos = std::make_pair(pos.first + (i*size),
-						                           pos.second + (j*size));
+					                             pos.second + (j*size));
 
 					new_cave[new_pos] = new_val;
 				}
@@ -55,19 +55,19 @@ namespace Day15
 	{
 		std::vector<std::vector<bool>> grid(i, std::vector<bool>(i, true));
 
-		return grid;  
+		return grid;
 	}
 
 
 	Pos minDist(const std::unordered_map<Pos, uint, pair_hash>& dist,
-		          const std::unordered_set<Pos, pair_hash>& Q)
+	            const std::unordered_set<Pos, pair_hash>& Q)
 	{
 		uint min = 1000000 - 1;
 		Pos p;
 		for (auto & q : Q)
 		{
 			auto v = dist.at(q);
-			if (v < min) 
+			if (v < min)
 			{
 				min = v;
 				p = q;
@@ -77,7 +77,7 @@ namespace Day15
 	}
 
 	std::vector<Pos> nbrs(const uint dim, const Pos& p,
-		                    const std::vector<std::vector<bool>>& Q)
+	                      const std::vector<std::vector<bool>>& Q)
 	{
 		std::vector<Pos> ns;
 		ns.reserve(4);
@@ -110,7 +110,7 @@ namespace Day15
 	}
 
 	uint dij(const std::map<Pos, uint>g, const Pos source, const Pos target,
-		       const uint dim)
+	         const uint dim)
 	{
 		auto R = initGrid(dim);
 		std::unordered_set<Pos, pair_hash> Flagged;
@@ -150,7 +150,7 @@ namespace Day15
 		auto inputLines = AH::ReadTextFile(filename);
 		const auto cave = parseInput(inputLines);
 
-		const Pos start  = std::make_pair(0, 0 );
+		const Pos start = std::make_pair(0, 0 );
 		const Pos target1 = std::make_pair(99,99);
 		const auto dist1 = dij(cave, start, target1, 100);
 
