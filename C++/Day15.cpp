@@ -1,0 +1,173 @@
+#include "AH.h"
+
+namespace Day15
+{
+
+	typedef std::pair<uint, uint> Pos;
+
+	struct pair_hash {
+			std::size_t operator () (const std::pair<uint, uint> &p) const {
+				return 10000 * p.first + p.second;
+			// auto h1 = std::hash<T1>{}(p.first);
+			// auto h2 = std::hash<T2>{}(p.second);
+
+			// Mainly for demonstration purposes, i.e. works but is overly simple
+			// In the real world, use sth. like boost.hash_combine
+			// return h1 ^ h2;  
+		}
+	};
+
+	std::map<Pos, uint>parseInput(const std::vector<std::string> ss)
+	{
+		std::map<Pos, uint>cave;
+
+		for (size_t i = 0; i < ss.size(); ++i)
+		{
+			for (size_t j = 0; j < ss[i].size(); ++j)
+			{
+				Pos p = std::make_pair(i, j);
+				auto v = std::stoi(ss[i].substr(j, 1));
+				cave[p] = v;
+			}
+		}
+
+		return cave;
+	}
+
+	std::map<Pos, uint>expandCave(const std::map<Pos, uint>cave,
+		                             const uint n, const uint size)
+	{
+		std::map<Pos, uint>new_cave;
+		for (size_t i = 0; i < n; ++i)
+		{
+			for (size_t j = 0; j < n; ++j)
+			{
+				for (auto [pos, val] : cave)
+				{
+					auto new_val = (val + i + j);
+					new_val -= (new_val > 9) ? 9 : 0;
+
+					Pos new_pos = std::make_pair(pos.first + (i*size),
+						                           pos.second + (j*size));
+
+					new_cave[new_pos] = new_val;
+				}
+			}
+		}
+		return new_cave;
+	}
+
+	std::vector<std::vector<bool>> initGrid(const uint i)
+	{
+		std::vector<std::vector<bool>> grid(i, std::vector<bool>(i, true));
+
+		return grid;  
+	}
+
+
+	Pos minDist(const std::unordered_map<Pos, uint, pair_hash>& dist,
+		          const std::unordered_set<Pos, pair_hash>& Q)
+	{
+		uint min = 1000000 - 1;
+		Pos p;
+		for (auto & q : Q)
+		{
+			auto v = dist.at(q);
+			if (v < min) 
+			{
+				min = v;
+				p = q;
+			}
+		}
+		return p;
+	}
+
+	std::vector<Pos> nbrs(const uint dim, const Pos& p,
+		                    const std::vector<std::vector<bool>>& Q)
+		                    // const std::unordered_set<Pos, pair_hash>& Q)
+	{
+		std::vector<Pos> ns;
+		ns.reserve(4);
+
+		if (p.second > 0) {
+			auto pu = std::make_pair(p.first, p.second - 1);
+			if (Q[p.first][p.second - 1])
+				ns.push_back(pu);
+		}
+
+		if (p.first > 0) {
+			auto pl = std::make_pair(p.first - 1, p.second);
+			if (Q[p.first - 1][p.second])
+				ns.push_back(pl);
+		}
+
+		if (p.second < (dim - 1)) {
+			auto pd = std::make_pair(p.first, p.second + 1);
+			if (Q[p.first][p.second + 1])
+				ns.push_back(pd);
+		}
+
+		if (p.first < (dim - 1)) {
+			auto pu = std::make_pair(p.first + 1, p.second);
+			if (Q[p.first + 1][p.second])
+				ns.push_back(pu);
+		}
+
+		return ns;
+	}
+
+	uint dij(const std::map<Pos, uint>g, const Pos source, const Pos target,
+		       const uint dim)
+	{
+		auto R = initGrid(dim);
+		std::unordered_set<Pos, pair_hash> Flagged;
+		std::unordered_map<Pos, uint, pair_hash>dist;
+
+		for (auto [k,v] : g)
+			dist[k] = 1000000;
+
+		dist[source] = 0;
+		Flagged.insert(source);
+
+		while (true)
+		{
+			auto u = minDist(dist, Flagged);
+
+			R[u.first][u.second] = false;
+			Flagged.erase(u);
+			if (u == target)
+				return dist[u];
+
+			auto ns = nbrs(dim, u, R);
+			for (auto & n : ns)
+			{
+				auto alt = dist[u] + g.at(n);
+				if (alt < dist[n])
+					dist[n] = alt;
+
+				Flagged.insert(n);
+			}
+		}
+
+		return 0;
+	}
+
+	int Run(const std::string& filename)
+	{
+		auto inputLines = AH::ReadTextFile(filename);
+		const auto cave = parseInput(inputLines);
+
+		const Pos start  = std::make_pair(0, 0 );
+		const Pos target1 = std::make_pair(99,99);
+		const auto dist1 = dij(cave, start, target1, 100);
+
+		const Pos target2 = std::make_pair(499, 499);
+		const auto big_cave = expandCave(cave, 5, 100);
+		const auto dist2 = dij(big_cave, start, target2, 500);
+
+		AH::PrintSoln(15, dist1, dist2);
+
+		return 0;
+	}
+
+}
