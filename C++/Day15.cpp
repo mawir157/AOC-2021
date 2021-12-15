@@ -8,12 +8,6 @@ namespace Day15
 	struct pair_hash {
 			std::size_t operator () (const std::pair<uint, uint> &p) const {
 				return 10000 * p.first + p.second;
-			// auto h1 = std::hash<T1>{}(p.first);
-			// auto h2 = std::hash<T2>{}(p.second);
-
-			// Mainly for demonstration purposes, i.e. works but is overly simple
-			// In the real world, use sth. like boost.hash_combine
-			// return h1 ^ h2;  
 		}
 	};
 
