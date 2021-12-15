@@ -78,7 +78,6 @@ namespace Day15
 
 	std::vector<Pos> nbrs(const uint dim, const Pos& p,
 		                    const std::vector<std::vector<bool>>& Q)
-		                    // const std::unordered_set<Pos, pair_hash>& Q)
 	{
 		std::vector<Pos> ns;
 		ns.reserve(4);
