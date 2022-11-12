@@ -1,3 +1,5 @@
+export GO111MODULE=off
+
 if [ $# -gt 0 ]
 then
   day=$(printf "%02d" $1)
@@ -34,3 +36,5 @@ else
 		echo "Missing days = ["$missing"]"
 	fi
 fi
+
+export GO111MODULE=on
